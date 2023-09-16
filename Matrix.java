@@ -21,10 +21,10 @@ public class Matrix
             }
         }
             }
-        }
         
         
-    }
+        
+    
     
     public int getRows(){
         return numRows;
