@@ -11,9 +11,15 @@ public class Matrix
         matrix = new int[numRows][numCol];
     }
     public void generateMatrix(int rows, int col){
+        Scanner console = new Scanner(System.in);
         for(int i = 0;i < rows;i++){
             for(int j = 0;j < col;j++){
-                 //Do this now Ritvik Thota(Jagan ka Bache)
+                
+              System.out.println("What value for row " + i + " column " + j);
+              int val = console.nextInt();
+              matrix[i][j] = val;   
+            }
+        }
             }
         }
         
