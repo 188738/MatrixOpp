@@ -8,9 +8,15 @@ public class Matrix
         
         this.numRows = numRows;
         this.numCol = numCol;
-        
+        matrix = new int[numRows][numCol];
     }
-    public void generateMatrix(){
+    public void generateMatrix(int rows, int col){
+        for(int i = 0;i < rows;i++){
+            for(int j = 0;j < col;j++){
+                 //Do this now Ritvik Thota(Jagan ka Bache)
+            }
+        }
+        
         
     }
     
