@@ -6,21 +6,27 @@ public class Matrix
     int[][] matrix;
     public Matrix(int numRow, int numCol){
         
-        this.numRows = numRows;
+        this.numRows = numRow;
         this.numCol = numCol;
         matrix = new int[numRows][numCol];
-    }
-    public void generateMatrix(int rows, int col){
+        
+        
         Scanner console = new Scanner(System.in);
-        for(int i = 0;i < rows;i++){
-            for(int j = 0;j < col;j++){
-                
+        for(int i = 0;i < numRow;i++){
+            for(int j = 0;j < numCol;j++){                
               System.out.println("What value for row " + i + " column " + j);
               int val = console.nextInt();
               matrix[i][j] = val;   
+              //System.out.println(matrix[i][j]);
             }
+            System.out.println();
         }
-            }
+        
+    }
+    public int getVal(int row, int col){
+        return matrix[row][col];
+    }
+    
         
         
         
