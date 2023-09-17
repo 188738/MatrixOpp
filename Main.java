@@ -18,7 +18,7 @@ public class Main
             Matrix m1 = new Matrix(rows,col);
             
             //Prompt Operations
-            String[] operations = {"RREF","Rank"};
+            String[] operations = {"RREF","Rank", "Transpose"};
             System.out.println("What operation do you want to apply?");
             String operation = console.nextLine();
             if(operation.equals(operations[0])){
@@ -28,6 +28,8 @@ public class Main
             else if(operation.equals(operations[1])){
                 System.out.println("Rank is " + m1.getRows());
                 
+            } else if(operations.equals(operations[2])){
+                transpose(m1);
             }
         }
         else{
@@ -70,12 +72,12 @@ public class Main
         }
         else{
              for(int i = 0;i < m1.getRows();i++){
-            for(int j = 0;j < m1.getCol();j++){                
-              System.out.print(m1.getVal(i,j) + m2.getVal(i,j) + " ");
+                for(int j = 0;j < m1.getCol();j++){                
+                  System.out.print(m1.getVal(i,j) + m2.getVal(i,j) + " ");
               
-            }
+                }
             System.out.println();
-        }
+            }
         
         }
     }
@@ -106,13 +108,13 @@ public class Main
             for (int j = 0; j < m2.getCol(); j++) {
                     int sum = 0;
                 for (int k = 0; k < m1.getCol(); k++) {
-                    sum += m1.getVal(i,k) * m1.getVal(k,j);
+                    sum = sum + m1.getVal(i,k) * m1.getVal(k,j);
                 }
                 result[i][j] = sum;
             }
             }
-            for (int[] row : result) {
-            for (int value : row) {
+            for (int[] r : result) {
+            for (int value : r) {
                 System.out.print(value + " ");
             }
             System.out.println();
@@ -145,50 +147,50 @@ public class Main
         int numRows = matrix.length;
         int numCols = matrix[0].length;
 
-        double[][] rrefMatrix = new double[numRows][numCols];
+        double[][] rref = new double[numRows][numCols];
         for (int i = 0; i < numRows; i++) {
-            System.arraycopy(matrix[i], 0, rrefMatrix[i], 0, numCols);
+            System.arraycopy(matrix[i], 0, rref[i], 0, numCols);
         }
 
-        int lead = 0;
+        int p = 0;
         for (int row = 0; row < numRows; row++) {
-            if (lead >= numCols) {
+            if (p >= numCols) {
                 break;
             }
 
             int pivotRow = row;
-            while (rrefMatrix[pivotRow][lead] == 0) {
+            while (rref[pivotRow][p] == 0) {
                 pivotRow++;
                 if (pivotRow == numRows) {
                     pivotRow = row;
-                    lead++;
-                    if (lead == numCols) {
+                    p++;
+                    if (p == numCols) {
                         break;
                     }
                 }
             }
 
             if (pivotRow != row) {
-                double[] temp = rrefMatrix[row];
-                rrefMatrix[row] = rrefMatrix[pivotRow];
-                rrefMatrix[pivotRow] = temp;
+                double[] temp = rref[row];
+                rref[row] = rref[pivotRow];
+                rref[pivotRow] = temp;
             }
 
-            double pivotValue = rrefMatrix[row][lead];
+            double pivotValue = rref[row][p];
             for (int col = 0; col < numCols; col++) {
-                rrefMatrix[row][col] /= pivotValue;
+                rref[row][col] /= pivotValue;
             }
 
             for (int i = 0; i < numRows; i++) {
                 if (i != row) {
-                    double factor = rrefMatrix[i][lead];
+                    double factor = rref[i][p];
                     for (int col = 0; col < numCols; col++) {
-                        rrefMatrix[i][col] -= factor * rrefMatrix[row][col];
+                        rref[i][col] = rref[i][col] - factor * rref[row][col];
                     }
                 }
             }
 
-            lead++;
+            p++;
         }
         
     }
@@ -196,11 +198,11 @@ public class Main
     {
         int[][] x = m1.matrix;
         int[][] y = new int[x.length][x[0].length];
-        for(int row = 0; row < x.length; row++)
+        for(int r = 0; r < x.length; r++)
         {
-            for(int col = 0; col < x[row].length; col++)
+            for(int c = 0; c < x[r].length; c++)
             {
-                y[row][col] = x[col][row];
+                y[r][c] = x[c][r];
             }
         }
         for(int i = 0;i < m1.getRows();i++){
@@ -213,4 +215,3 @@ public class Main
     
     
 }
-
