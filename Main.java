@@ -1,4 +1,3 @@
-
 import java.util.*;
 public class Main
 {
@@ -50,12 +49,14 @@ public class Main
             String operation = console.nextLine();
             if(operation.equals(operations[0])){
                 
-                
+                addMatrice(m1,m2);
             }
             else if(operation.equals(operations[1])){
+                multMatrice(m1,m2);
                 
             }
             else if(operation.equals(operations[2])){
+                subMatrice(m1,m2);
                 
             }
         }
