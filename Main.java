@@ -1,3 +1,4 @@
+
 import java.util.*;
 public class Main
 {
@@ -18,20 +19,14 @@ public class Main
             Matrix m1 = new Matrix(rows,col);
             
             //Prompt Operations
-            String[] operations = {"RREF", "Null Space", "Column Space", "Rank"};
+            String[] operations = {"RREF","Rank"};
             System.out.println("What operation do you want to apply?");
             String operation = console.nextLine();
             if(operation.equals(operations[0])){
                 
-                
+                RREF(m1);
             }
             else if(operation.equals(operations[1])){
-                
-            }
-            else if(operation.equals(operations[2])){
-                
-            }
-            else if(operation.equals(operations[3])){
                 System.out.println("Rank is " + m1.getRows());
                 
             }
@@ -125,7 +120,7 @@ public class Main
         }
         
     }
-    public void scalarMultplications(Matrix m1, int s){
+    public static void scalarMultplications(Matrix m1, int s){
         for(int i = 0;i < m1.getRows();i++){
             for(int j = 0;j < m1.getCol();j++){
                 System.out.print(m1.getVal(i, j) * s + " ");
@@ -134,7 +129,7 @@ public class Main
         }
         
     }
-    public void determinant(Matrix m1){
+    public static void determinant(Matrix m1){
         
         if(m1.getRows() != 2 && m1.getCol() != 2){
             System.out.println("Invalid");
@@ -144,7 +139,7 @@ public class Main
         }
         
     }
-    public void RREF(Matrix m1){
+    public static void RREF(Matrix m1){
         int[][] matrix = m1.matrix;
         int numRows = matrix.length;
         int numCols = matrix[0].length;
@@ -195,6 +190,24 @@ public class Main
             lead++;
         }
         
+    }
+    public static void transpose(Matrix m1)
+    {
+        int[][] x = m1.matrix;
+        int[][] y = new int[x.length][x[0].length];
+        for(int row = 0; row < x.length; row++)
+        {
+            for(int col = 0; col < x[row].length; col++)
+            {
+                y[row][col] = x[col][row];
+            }
+        }
+        for(int i = 0;i < m1.getRows();i++){
+            for(int j = 0;j < m1.getCol();j++){
+                System.out.print(m1.getVal(i,j) + " ");
+            }
+            System.out.println();
+        }
     }
     
     
