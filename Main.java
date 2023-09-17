@@ -1,4 +1,3 @@
-
 import java.util.*;
 public class Main
 {
@@ -126,5 +125,78 @@ public class Main
         }
         
     }
+    public void scalarMultplications(Matrix m1, int s){
+        for(int i = 0;i < m1.getRows();i++){
+            for(int j = 0;j < m1.getCol();j++){
+                System.out.print(m1.getVal(i, j) * s + " ");
+            }
+            System.out.println();
+        }
+        
+    }
+    public void determinant(Matrix m1){
+        
+        if(m1.getRows() != 2 && m1.getCol() != 2){
+            System.out.println("Invalid");
+        }else{
+            int determinant = m1.getVal(0,0) * m1.getVal(1,1) + m1.getVal(0,1) * m1.getVal(1,0); 
+            System.out.println(determinant);
+        }
+        
+    }
+    public void RREF(Matrix m1){
+        int[][] matrix = m1.matrix;
+        int numRows = matrix.length;
+        int numCols = matrix[0].length;
+
+        double[][] rrefMatrix = new double[numRows][numCols];
+        for (int i = 0; i < numRows; i++) {
+            System.arraycopy(matrix[i], 0, rrefMatrix[i], 0, numCols);
+        }
+
+        int lead = 0;
+        for (int row = 0; row < numRows; row++) {
+            if (lead >= numCols) {
+                break;
+            }
+
+            int pivotRow = row;
+            while (rrefMatrix[pivotRow][lead] == 0) {
+                pivotRow++;
+                if (pivotRow == numRows) {
+                    pivotRow = row;
+                    lead++;
+                    if (lead == numCols) {
+                        break;
+                    }
+                }
+            }
+
+            if (pivotRow != row) {
+                double[] temp = rrefMatrix[row];
+                rrefMatrix[row] = rrefMatrix[pivotRow];
+                rrefMatrix[pivotRow] = temp;
+            }
+
+            double pivotValue = rrefMatrix[row][lead];
+            for (int col = 0; col < numCols; col++) {
+                rrefMatrix[row][col] /= pivotValue;
+            }
+
+            for (int i = 0; i < numRows; i++) {
+                if (i != row) {
+                    double factor = rrefMatrix[i][lead];
+                    for (int col = 0; col < numCols; col++) {
+                        rrefMatrix[i][col] -= factor * rrefMatrix[row][col];
+                    }
+                }
+            }
+
+            lead++;
+        }
+        
+    }
+    
     
 }
+
